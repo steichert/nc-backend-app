@@ -1,4 +1,4 @@
-package co.za.newcreation.backend_app
+package za.co.newcreation.backendapp
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

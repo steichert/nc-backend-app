@@ -1,4 +1,4 @@
-package co.za.newcreation.backend_app
+package za.co.newcreation.backendapp
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
