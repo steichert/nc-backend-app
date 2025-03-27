@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250325-02-create-events-table.yaml
+      author: Stephen Teichert
+      descriptions: Create Events table
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Events
+      changes:
+        - createTable:
+            tableName: Events
+            columns:
+              - column:
+                  name: Id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: Title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Description
+                  type: text
+              - column:
+                  name: State
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EventDate
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ActionLabel
+                  type: varchar(255)
+              - column:
+                  name: ActionLink
+                  type: varchar(255)
+              - column:
+                  name: CreationDate
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ModifiedDate
+                  type: datetime
+        - createIndex:
+            indexNme: idx_Events_EventDate
+            tableName: Events
+            columns:
+              - column:
+                  name: EventDate
+                  descending: false

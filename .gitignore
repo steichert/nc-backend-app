@@ -34,3 +34,6 @@ build/
 
 # Idea folder
 .idea/
+
+# Docker compose environment variables
+.env
