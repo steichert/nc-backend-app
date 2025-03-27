@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250325-01-create-shedlock-table.yaml
+      author: Stephen Teichert
+      descriptions: Create Shedlock table
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: Shedlock
+      changes:
+        - createTable:
+            tableName: Shedlock
+            columns:
+              - column:
+                  name: Name
+                  type: varchar(64)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: LockUntil
+                  type: timestamp(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LockedAt
+                  type: timestamp(3)
+                  defaultValueComputed: CURRENT_TIMESTAMP(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LockedBy
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

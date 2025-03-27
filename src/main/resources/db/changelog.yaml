@@ -1,1 +1,10 @@
 databaseChangeLog:
+  - include:
+      file: migrations/20250325-01-create-shedlock-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/20250325-02-create-events-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/20250325-03-create-eventattachments-table.yaml
+      relativeToChangelogFile: true

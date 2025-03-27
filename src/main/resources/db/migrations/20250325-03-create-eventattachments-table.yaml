@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250325-03-create-eventattachments-table.yaml
+      author: Stephen Teichert
+      descriptions: Create EventAttachments table
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: EventAttachments
+      changes:
+        - createTable:
+            tableName: EventAttachments
+            columns:
+              - column:
+                  name: Id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: AttachmentUrl
+                  type: varchar(255)
+              - column:
+                  name: AttachmentFilename
+                  type: varchar(255)
+              - column:
+                  name: AttachmentPublicId
+                  type: varchar(255)
+              - column:
+                  name: AttachmentType
+                  type: varchar(50)
+              - column:
+                  name: EventId
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - createIndex:
+                  indexNme: idx_Events_EventDate
+                  tableName: Events
+                  columns:
+        - addForeignKeyConstraint:
+            constraintName: fk_EventAttachments_Events
+            baseTableName: EventAttachments
+            baseColumnNames:
+              - EventId
+            referencedTableName: Events
+            referencedColumnNames:
+              - Id

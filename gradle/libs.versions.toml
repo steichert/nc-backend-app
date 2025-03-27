@@ -1,0 +1,7 @@
+[versions]
+mockkVersion = "1.13.17"
+shedlockVersion = "6.3.0"
+
+[libraries]
+mockkDependency = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
+shedlockDependency = { group = "net.javacrumbs.shedlock", name = "shedlock-spring", version.ref = "shedlockVersion" }
