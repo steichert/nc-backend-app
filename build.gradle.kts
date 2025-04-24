@@ -1,9 +1,12 @@
+val mockitoAgent = configurations.create("mockitoAgent")
+
 plugins {
 	kotlin("jvm") version "2.0.0"
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.4.3"
 	id("io.spring.dependency-management") version "1.1.7"
 	kotlin("plugin.jpa") version "1.9.25"
+	kotlin("plugin.serialization") version "2.0.0"
 }
 
 group = "za.co.newcreation"
@@ -24,14 +27,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
 	// Kotlin
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
 
 	// Coroutines
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
@@ -47,6 +51,8 @@ dependencies {
 
 	// Tests
 	testImplementation(libs.mockkDependency)
+	testImplementation(libs.mockitoDependency)
+	mockitoAgent(libs.mockitoDependency) { isTransitive = false }
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -69,4 +75,11 @@ allOpen {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks {
+	test {
+		jvmArgs("-javaagent:${mockitoAgent.asPath}")
+		jvmArgs("-Xshare:off")
+	}
 }
