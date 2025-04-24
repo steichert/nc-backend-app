@@ -1,6 +1,5 @@
 package za.co.newcreation.backendapp.controller.integration.step
 
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.springframework.beans.factory.annotation.Autowired

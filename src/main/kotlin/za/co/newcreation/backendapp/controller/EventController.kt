@@ -3,7 +3,6 @@ package za.co.newcreation.backendapp.controller
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
