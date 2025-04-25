@@ -41,8 +41,13 @@ databaseChangeLog:
                   name: ActionLabel
                   type: varchar(255)
               - column:
-                  name: ActionLink
+                  name: ActionUrl
                   type: varchar(255)
+              - column:
+                  name: PublicId
+                  type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: CreationDate
                   type: datetime
@@ -52,7 +57,15 @@ databaseChangeLog:
                   name: ModifiedDate
                   type: datetime
         - createIndex:
-            indexNme: idx_Events_EventDate
+            indexName: idx_Events_PublicId
+            tableName: Events
+            unique: true
+            columns:
+              - column:
+                  name: PublicId
+                  descending: false
+        - createIndex:
+            indexName: idx_Events_EventDate
             tableName: Events
             columns:
               - column:

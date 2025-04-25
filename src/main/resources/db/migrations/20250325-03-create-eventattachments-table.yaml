@@ -31,15 +31,32 @@ databaseChangeLog:
               - column:
                   name: AttachmentType
                   type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EventDate
+                  type: datetime
+                  constraints:
+                    nullable: false
               - column:
                   name: EventId
                   type: bigint
                   constraints:
                     nullable: false
-              - createIndex:
-                  indexNme: idx_Events_EventDate
-                  tableName: Events
-                  columns:
+        - createIndex:
+            indexName: idx_EventAttachments_EventDate
+            tableName: EventAttachments
+            columns:
+              - column:
+                  name: EventDate
+                  descending: false
+        - createIndex:
+            indexName: idx_EventAttachments_EventId
+            tableName: EventAttachments
+            columns:
+              - column:
+                  name: EventId
+                  descending: false
         - addForeignKeyConstraint:
             constraintName: fk_EventAttachments_Events
             baseTableName: EventAttachments
